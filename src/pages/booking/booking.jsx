@@ -7,9 +7,10 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Pagination from "@mui/material/Pagination";
+import { Button } from "@mui/material";
 
-function createData(name, email, status, createdAt) {
-  return { name, email, status, createdAt };
+function createData(name, movie, seat, date, time) {
+  return { name, movie, seat, date, time };
 }
 
 const rows = [
@@ -20,20 +21,22 @@ const rows = [
   createData("Gingerbread", 356, 16.0, 49, 3.9),
 ];
 
-const User = () => {
+const Booking = () => {
   const { page, setPage } = useState();
 
   return (
     <div className="container p-5">
-      <h1 className="text-3xl font-bold mb-4">Users</h1>
+      <h1 className="text-3xl font-bold mb-4">Bookings</h1>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
-              <TableCell align="right">Email</TableCell>
-              <TableCell align="right">Status</TableCell>
-              <TableCell align="right">Joined Date</TableCell>
+              <TableCell align="right">Movie</TableCell>
+              <TableCell align="right">Seat</TableCell>
+              <TableCell align="right">Date</TableCell>
+              <TableCell align="right">Time</TableCell>
+              <TableCell align="right"></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -45,9 +48,13 @@ const User = () => {
                 <TableCell component="th" scope="row">
                   {row.name}
                 </TableCell>
-                <TableCell align="right">{row.email}</TableCell>
-                <TableCell align="right">{row.status}</TableCell>
-                <TableCell align="right">{row.createdAt}</TableCell>
+                <TableCell align="right">{row.movie}</TableCell>
+                <TableCell align="right">{row.seat}</TableCell>
+                <TableCell align="right">{row.date}</TableCell>
+                <TableCell align="right">{row.time}</TableCell>
+                <TableCell align="right">
+                  <Button style={{ textTransform: "none" }}>Detail</Button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -60,4 +67,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default Booking;

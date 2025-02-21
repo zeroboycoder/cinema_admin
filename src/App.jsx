@@ -2,7 +2,11 @@ import { Routes, Route } from "react-router";
 import Layout from "./hoc/layout";
 import DashboardPage from "./pages/dashboard/dashboard";
 import MoviePage from "./pages/movie/movie";
+import MovieDetailPage from "./pages/movie/movieDetail";
+import CreateMoviePage from "./pages/movie/createMovie";
 import UserPage from "./pages/user/user";
+import BookingPage from "./pages/booking/booking";
+import BookingDetailPage from "./pages/booking/bookingDetail";
 
 const App = () => {
   return (
@@ -10,6 +14,10 @@ const App = () => {
       <Routes>
         <Route path="/users" Component={UserPage} />
         <Route path="/movies" Component={MoviePage} />
+        <Route path="/movies/create" Component={CreateMoviePage} />
+        <Route path="/movies/:id" Component={MovieDetailPage} />
+        <Route path="/bookings" Component={BookingPage} />
+        <Route path="/bookings/:id" Component={BookingDetailPage} />
         <Route path="/" Component={DashboardPage} />
       </Routes>
     </Layout>

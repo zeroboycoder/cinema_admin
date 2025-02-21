@@ -35,30 +35,46 @@ const SideNav = () => {
       </DrawerHeader> */}
       <Divider />
       <List>
-        <ListItem>
-          <ListItemButton>
-            <ListItemIcon>
-              <InboxIcon />
-            </ListItemIcon>
-            <NavLink to={"/"}>Dashboard</NavLink>
-          </ListItemButton>
-        </ListItem>
-        <ListItem>
-          <ListItemButton>
-            <ListItemIcon>
-              <InboxIcon />
-            </ListItemIcon>
-            <NavLink to={"/users"}>Users</NavLink>
-          </ListItemButton>
-        </ListItem>
-        <ListItem>
-          <ListItemButton>
-            <ListItemIcon>
-              <InboxIcon />
-            </ListItemIcon>
-            <NavLink to={"/movies"}>Movies</NavLink>
-          </ListItemButton>
-        </ListItem>
+        <NavLink to={"/"}>
+          <ListItem>
+            <ListItemButton>
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>
+              Dashboard
+            </ListItemButton>
+          </ListItem>
+        </NavLink>
+        <NavLink to={"/users"}>
+          <ListItem>
+            <ListItemButton>
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>
+              Users
+            </ListItemButton>
+          </ListItem>
+        </NavLink>
+        <NavLink to={"/movies"}>
+          <ListItem>
+            <ListItemButton>
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>
+              Movies
+            </ListItemButton>
+          </ListItem>
+        </NavLink>
+        <NavLink to={"/bookings"}>
+          <ListItem>
+            <ListItemButton>
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>
+              Bookings
+            </ListItemButton>
+          </ListItem>
+        </NavLink>
       </List>
     </Drawer>
   );
