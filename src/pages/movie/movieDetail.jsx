@@ -1,33 +1,50 @@
-const movieDetail = () => {
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router";
+import moment from "moment";
+import API from "../../config/axios";
+
+const MovieDetail = () => {
+  const [movie, setMovie] = useState();
+  const [runtime, setRuntime] = useState();
+  const location = useLocation();
+
+  useEffect(() => {
+    const id = location.pathname.split("/movies/")[1];
+    const fetchData = async () => {
+      const response = await API.get(`/api/user/movies/by-id/${id}`);
+      setMovie(response.data.data);
+      const hour = moment
+        .duration(response.data.data.duration, "minutes")
+        .asHours();
+      const minute = moment
+        .duration(response.data.data.duration, "minutes")
+        .asMinutes();
+      if (`${Math.floor(minute % 60)}` > 0)
+        setRuntime(`${Math.floor(hour)}hrs ${Math.floor(minute % 60)}min`);
+      else setRuntime(`${Math.floor(hour)}hrs`);
+    };
+    fetchData();
+  }, [location]);
+
   return (
-    <div className="flex flex-col gap-4 p-5">
-      <div className="flex gap-5">
-        <img
-          src="https://m.media-amazon.com/images/M/MV5BYWVjODZjNDgtYjk4ZS00OTg5LTg5NDQtZDMxZDQ4ZmM5MGJmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
-          width={200}
-        />
-        <div className="flex flex-col gap-1.5">
-          <h1 className="text-3xl font-bold">Movie Name</h1>
-          <p>Genre : Animation, Sci-fi</p>
-          <p>Duration : 1hr 48min</p>
+    <>
+      {movie ? (
+        <div className="flex flex-col gap-4 p-5">
+          <div className="flex gap-5">
+            <img src={movie?.image} width={200} />
+            <div className="flex flex-col gap-1.5">
+              <h1 className="text-3xl font-bold">{movie.name}</h1>
+              <p>Genre : {movie.genres}</p>
+              <p>Duration : {runtime}</p>
+            </div>
+          </div>
+          <p>{movie?.description}</p>
         </div>
-      </div>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda omnis
-        cum earum adipisci tempore libero repellendus! Exercitationem facilis
-        repellat hic voluptas voluptatibus? Mollitia in nesciunt repudiandae
-        sint! Deleniti numquam maxime eaque minima, unde consectetur
-        necessitatibus officia earum adipisci debitis? Ea est nihil nobis quos
-        minima dolore nesciunt a voluptas. Harum eligendi nemo soluta molestias
-        cumque consequatur exercitationem minima mollitia odit facilis quam quas
-        aspernatur ut excepturi rerum temporibus quisquam deleniti, atque ipsam
-        natus officiis in nisi. Mollitia, officiis. Cumque minima voluptatibus
-        veritatis explicabo iure atque amet fuga, maiores doloribus esse
-        accusantium magnam, eaque animi, sint cupiditate reprehenderit
-        distinctio in error!
-      </p>
-    </div>
+      ) : (
+        <div>Loading...</div>
+      )}
+    </>
   );
 };
 
-export default movieDetail;
+export default MovieDetail;

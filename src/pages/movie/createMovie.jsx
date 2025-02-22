@@ -2,6 +2,7 @@ import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import { CloudUpload } from "@mui/icons-material";
 import { Button, TextField } from "@mui/material";
+import API from "../../config/axios";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -21,16 +22,27 @@ const CreateMovie = () => {
   const [duration, setDuration] = useState("");
   const [description, setDescription] = useState("");
   const [file, setFile] = useState();
+  const [preview, setPreview] = useState();
 
-  const onSubmitHandler = () => {
-    console.log("click");
+  const onSubmitHandler = async () => {
     const formData = new FormData();
 
-    formData.append("file", file);
+    formData.append("image", file);
     formData.append("name", name);
     formData.append("genre", genre);
     formData.append("duration", duration);
     formData.append("description", description);
+
+    await API.post("/api/admin/movies/create", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+
+    setName("");
+    setGenre("");
+    setDuration("");
+    setDescription("");
+    setFile();
+    setPreview();
   };
 
   return (
@@ -78,10 +90,16 @@ const CreateMovie = () => {
           Upload Image
           <VisuallyHiddenInput
             type="file"
-            onChange={(event) => setFile(event.target.files[0])}
+            onChange={(event) => {
+              setFile(event.target.files[0]);
+              setPreview(URL.createObjectURL(event.target.files[0]));
+            }}
             multiple
           />
         </Button>
+        {preview && (
+          <img src={preview} alt="preview" width={100} height={180} />
+        )}
         <div className="flex justify-end">
           <Button variant="contained" onClick={onSubmitHandler}>
             Create
