@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -8,21 +9,38 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Pagination from "@mui/material/Pagination";
 import { Button } from "@mui/material";
-
-function createData(name, movie, seat, date, time) {
-  return { name, movie, seat, date, time };
-}
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
+import API from "../../config/axios";
+import moment from "moment";
 
 const Booking = () => {
-  const { page, setPage } = useState();
+  const [bookings, setBookings] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await API.get(
+        `/api/admin/movies/bookings?page=${page}&pageSize=10&order=DESC`
+      );
+      console.log(response.data);
+      setBookings(response.data.data.data);
+      setPage(response.data.data.currentPage);
+      setTotalPage(response.data.data.totalPage);
+    };
+    fetchData();
+  }, [page]);
+
+  const rows = bookings.map((booking) => {
+    return {
+      id: booking.id,
+      name: booking.user.name,
+      movie: booking.movie.name,
+      seat: booking.seat_number,
+      date: moment(booking.date).format("DD MMM YYYY"),
+      time: booking.time,
+    };
+  });
 
   return (
     <div className="container p-5">
@@ -53,7 +71,14 @@ const Booking = () => {
                 <TableCell align="right">{row.date}</TableCell>
                 <TableCell align="right">{row.time}</TableCell>
                 <TableCell align="right">
-                  <Button style={{ textTransform: "none" }}>Detail</Button>
+                  <Button
+                    style={{ textTransform: "none" }}
+                    onClick={() => {
+                      navigate(`/bookings/${row.id}`);
+                    }}
+                  >
+                    Detail
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
@@ -61,7 +86,7 @@ const Booking = () => {
         </Table>
       </TableContainer>
       <div className="flex justify-end mt-2">
-        <Pagination count={page || 6} />
+        <Pagination count={totalPage} onChange={(e, page) => setPage(page)} />
       </div>
     </div>
   );

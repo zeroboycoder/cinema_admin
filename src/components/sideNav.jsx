@@ -5,7 +5,8 @@ import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
+import { Apps, People, LocalMovies, Book } from "@mui/icons-material";
+import Logo from "../assets/logo.png";
 
 const drawerWidth = 240;
 
@@ -24,52 +25,46 @@ const SideNav = () => {
       anchor="left"
       open={true}
     >
-      {/* <DrawerHeader>
-        <IconButton onClick={handleDrawerClose}>
-          {theme.direction === "ltr" ? (
-            <ChevronLeftIcon />
-          ) : (
-            <ChevronRightIcon />
-          )}
-        </IconButton>
-      </DrawerHeader> */}
+      <div className="flex justify-center items-center p-2">
+        <h1 className="text-3xl font-bold">iCinema</h1>
+      </div>
       <Divider />
       <List>
-        <NavLink to={"/"}>
+        <NavLink to={"/"} activeClassName="active">
           <ListItem>
             <ListItemButton>
               <ListItemIcon>
-                <InboxIcon />
+                <Apps />
               </ListItemIcon>
               Dashboard
             </ListItemButton>
           </ListItem>
         </NavLink>
-        <NavLink to={"/users"}>
+        <NavLink to={"/users"} activeClassName="active">
           <ListItem>
             <ListItemButton>
               <ListItemIcon>
-                <InboxIcon />
+                <People />
               </ListItemIcon>
               Users
             </ListItemButton>
           </ListItem>
         </NavLink>
-        <NavLink to={"/movies"}>
+        <NavLink to={"/movies"} activeClassName="active">
           <ListItem>
             <ListItemButton>
               <ListItemIcon>
-                <InboxIcon />
+                <LocalMovies />
               </ListItemIcon>
               Movies
             </ListItemButton>
           </ListItem>
         </NavLink>
-        <NavLink to={"/bookings"}>
+        <NavLink to={"/bookings"} activeClassName="active">
           <ListItem>
             <ListItemButton>
               <ListItemIcon>
-                <InboxIcon />
+                <Book />
               </ListItemIcon>
               Bookings
             </ListItemButton>

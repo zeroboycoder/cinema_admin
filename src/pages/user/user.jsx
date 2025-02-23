@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -7,21 +7,35 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Pagination from "@mui/material/Pagination";
-
-function createData(name, email, status, createdAt) {
-  return { name, email, status, createdAt };
-}
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
+import API from "../../config/axios";
+import moment from "moment";
 
 const User = () => {
-  const { page, setPage } = useState();
+  const [users, setUsers] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await API.get(
+        `/api/admin/users/lists?page=${page}&pageSize=10&order=DESC`
+      );
+      const userData = response.data.data.data;
+      setUsers(userData);
+      setPage(response.data.data.currentPage);
+      setTotalPage(response.data.data.totalPage);
+    };
+    fetchData();
+  }, [page]);
+
+  const rows = users.map((user) => {
+    return {
+      name: user.name,
+      email: user.email,
+      status: user.status === true ? "Active" : "Inactive",
+      createdAt: moment(user.createdAt).format("DD MMM YYYY"),
+    };
+  });
 
   return (
     <div className="container p-5">
@@ -54,7 +68,7 @@ const User = () => {
         </Table>
       </TableContainer>
       <div className="flex justify-end mt-2">
-        <Pagination count={page || 6} />
+        <Pagination count={totalPage} onChange={(e, page) => setPage(page)} />
       </div>
     </div>
   );

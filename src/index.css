@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+a.active > li {
+  color: #fff;
+  background-color: #1a202c;
+}
+
+a.active > li > div > div {
+  color: #fff;
+}
