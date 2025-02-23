@@ -8,4 +8,4 @@ services:
       - .:/app
       - /app/node_modules
     container_name: cinema_project_admin
-    command: npm run dev
+    command: npm run dev --host 0.0.0.0
