@@ -6,7 +6,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import { Apps, People, LocalMovies, Book } from "@mui/icons-material";
-import Logo from "../assets/logo.png";
 
 const drawerWidth = 240;
 
