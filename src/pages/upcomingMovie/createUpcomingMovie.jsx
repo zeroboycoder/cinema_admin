@@ -20,6 +20,7 @@ const CreateMovie = () => {
   const [name, setName] = useState("");
   const [genre, setGenre] = useState("");
   const [duration, setDuration] = useState("");
+  const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
   const [file, setFile] = useState();
   const [preview, setPreview] = useState();
@@ -31,6 +32,7 @@ const CreateMovie = () => {
     formData.append("name", name);
     formData.append("genre", genre);
     formData.append("duration", duration);
+    formData.append("date", date);
     formData.append("description", description);
 
     await API.post("/api/admin/movies/upcoming/create", formData, {
@@ -40,6 +42,7 @@ const CreateMovie = () => {
     setName("");
     setGenre("");
     setDuration("");
+    setDate("");
     setDescription("");
     setFile();
     setPreview();
@@ -73,6 +76,13 @@ const CreateMovie = () => {
         <TextField
           required
           id="outlined-required"
+          label="Date"
+          onChange={(e) => setDate(e.target.value)}
+          value={date}
+        />
+        <TextField
+          required
+          id="outlined-required"
           label="Description"
           onChange={(e) => setDescription(e.target.value)}
           value={description}
@@ -86,6 +96,7 @@ const CreateMovie = () => {
           variant="outlined"
           tabIndex={-1}
           startIcon={<CloudUpload />}
+          style={{ color: "#FC6D19" }}
         >
           Upload Image
           <VisuallyHiddenInput
@@ -101,7 +112,11 @@ const CreateMovie = () => {
           <img src={preview} alt="preview" width={100} height={180} />
         )}
         <div className="flex justify-end">
-          <Button variant="contained" onClick={onSubmitHandler}>
+          <Button
+            variant="outlined"
+            onClick={onSubmitHandler}
+            style={{ color: "#FC6D19", borderColor: "#FC6D19" }}
+          >
             Create
           </Button>
         </div>

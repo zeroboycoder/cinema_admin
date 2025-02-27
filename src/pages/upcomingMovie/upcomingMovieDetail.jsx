@@ -34,7 +34,7 @@ const MovieDetail = () => {
             <img src={movie?.image} width={200} />
             <div className="flex flex-col gap-1.5">
               <h1 className="text-3xl font-bold">{movie.name}</h1>
-              <p>Genre : {movie.genres}</p>
+              <p>Genre : {movie.genres.join(", ")}</p>
               <p>Duration : {runtime}</p>
               <p>Movie Date : {moment(movie.date).format("DD MMM YYYY")}</p>
             </div>

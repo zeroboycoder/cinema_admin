@@ -21,6 +21,7 @@ const CreateMovie = () => {
   const [genre, setGenre] = useState("");
   const [duration, setDuration] = useState("");
   const [description, setDescription] = useState("");
+  const [showingDate, setShowingDate] = useState("");
   const [file, setFile] = useState();
   const [preview, setPreview] = useState();
 
@@ -73,6 +74,13 @@ const CreateMovie = () => {
         <TextField
           required
           id="outlined-required"
+          label="Showing Date"
+          onChange={(e) => setShowingDate(e.target.value)}
+          value={showingDate}
+        />
+        <TextField
+          required
+          id="outlined-required"
           label="Description"
           onChange={(e) => setDescription(e.target.value)}
           value={description}
@@ -86,6 +94,7 @@ const CreateMovie = () => {
           variant="outlined"
           tabIndex={-1}
           startIcon={<CloudUpload />}
+          style={{ color: "#FC6D19" }}
         >
           Upload Image
           <VisuallyHiddenInput
@@ -101,7 +110,11 @@ const CreateMovie = () => {
           <img src={preview} alt="preview" width={100} height={180} />
         )}
         <div className="flex justify-end">
-          <Button variant="contained" onClick={onSubmitHandler}>
+          <Button
+            variant="outlined"
+            onClick={onSubmitHandler}
+            style={{ color: "#FC6D19", borderColor: "#FC6D19" }}
+          >
             Create
           </Button>
         </div>
