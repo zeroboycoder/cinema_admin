@@ -36,7 +36,7 @@ const Booking = () => {
       id: booking.id,
       name: booking.user.name,
       movie: booking.movie.name,
-      seat: booking.seat_number,
+      seat: booking.seat_numbers.join(", "),
       date: moment(booking.date).format("DD MMM YYYY"),
       time: booking.time,
     };

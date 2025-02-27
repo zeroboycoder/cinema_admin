@@ -1,0 +1,18 @@
+div.css-1lwhjos-MuiPaper-root-MuiDrawer-paper {
+  background-color: #1f293d;
+  color: #fafafa;
+}
+
+div.css-cokf1l-MuiListItemIcon-root {
+  color: #fafafa;
+}
+
+.MuiList-root > a.active li {
+  background-color: #fafafa;
+  color: #111;
+}
+
+.MuiList-root > a.active .css-cokf1l-MuiListItemIcon-root {
+  background-color: #fafafa;
+  color: #111;
+}

@@ -61,7 +61,7 @@ const Dashboard = () => {
       id: booking.id,
       name: booking.user.name,
       movie: booking.movie.name,
-      seat: booking.seat_number,
+      seat: booking.seat_numbers.join(", "),
       date: moment(booking.date).format("DD MMM YYYY"),
       time: booking.time,
     };
@@ -74,7 +74,14 @@ const Dashboard = () => {
       <div className="flex gap-7">
         {/* set box shadow color */}
         <Box sx={{ boxShadow: 2 }}>
-          <Card variant="outlined">
+          <Card
+            variant="outlined"
+            style={{
+              backgroundColor: "#1f293d",
+              color: "#fafafa",
+              borderColor: "#fafafa",
+            }}
+          >
             <div className="p-5 w-56">
               <h1 className="text-xl font-bold">Total Users</h1>
               <p>{userCount}</p>
@@ -82,7 +89,14 @@ const Dashboard = () => {
           </Card>
         </Box>
         <Box sx={{ boxShadow: 2 }}>
-          <Card variant="outlined">
+          <Card
+            variant="outlined"
+            style={{
+              backgroundColor: "#1f293d",
+              color: "#fafafa",
+              borderColor: "#fafafa",
+            }}
+          >
             <div className="p-5 w-56 shadow-md">
               <h1 className="text-xl font-bold">Total Movies</h1>
               <p>{movieCount}</p>
@@ -90,7 +104,14 @@ const Dashboard = () => {
           </Card>
         </Box>
         <Box sx={{ boxShadow: 2 }}>
-          <Card variant="outlined">
+          <Card
+            variant="outlined"
+            style={{
+              backgroundColor: "#1f293d",
+              color: "#fafafa",
+              borderColor: "#fafafa",
+            }}
+          >
             <div className="p-5 w-56 shadow-md">
               <h1 className="text-xl font-bold">Total Bookings</h1>
               <p>{bookingCount}</p>

@@ -6,8 +6,9 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import { Apps, People, LocalMovies, Book } from "@mui/icons-material";
+import "./sideNav.css";
 
-const drawerWidth = 240;
+const drawerWidth = 260;
 
 const SideNav = () => {
   return (
@@ -28,7 +29,7 @@ const SideNav = () => {
         <h1 className="text-3xl font-bold">iCinema</h1>
       </div>
       <Divider />
-      <List>
+      <List className="h-screen">
         <NavLink to={"/"} activeClassName="active">
           <ListItem>
             <ListItemButton>
@@ -56,6 +57,16 @@ const SideNav = () => {
                 <LocalMovies />
               </ListItemIcon>
               Movies
+            </ListItemButton>
+          </ListItem>
+        </NavLink>
+        <NavLink to={"/upcoming-movies"} activeClassName="active">
+          <ListItem>
+            <ListItemButton>
+              <ListItemIcon>
+                <LocalMovies />
+              </ListItemIcon>
+              Upcoming Movies
             </ListItemButton>
           </ListItem>
         </NavLink>

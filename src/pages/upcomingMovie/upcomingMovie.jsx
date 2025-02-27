@@ -15,7 +15,7 @@ const Movie = () => {
     const fetchData = async () => {
       console.log("fetching data");
       const response = await API.get(
-        `/api/user/movies/lists?page=${page}&pageSize=10&order=DESC`
+        `/api/admin/movies/upcoming/lists?page=${page}&pageSize=10&order=DESC`
       );
       setMovies(response.data.data.data);
       setPage(response.data.data.currentPage);
@@ -26,7 +26,10 @@ const Movie = () => {
 
   const movieLists = movies?.map((movie, i) => (
     <Card className="my-4" key={i} style={{ backgroundColor: "#1f293d" }}>
-      <div className="flex" onClick={() => navigate(`/movies/${movie.id}`)}>
+      <div
+        className="flex"
+        onClick={() => navigate(`/upcoming-movies/${movie.id}`)}
+      >
         <img src={movie.image} width={120} height={240} />
         <div className="px-4 py-3 text-white">
           <h1 className="text-xl font-bold">{movie.name}</h1>
@@ -46,10 +49,14 @@ const Movie = () => {
         <h1 className="text-3xl font-bold">Movies</h1>
         <Button
           variant="outlined"
-          onClick={() => navigate("/movies/create")}
-          style={{ color: "#FC6D19", borderColor: "#FC6D19" }}
+          onClick={() => navigate("/upcoming-movies/create")}
+          style={{
+            color: "#FC6D19",
+            borderColor: "#FC6D19",
+            textTransform: "none",
+          }}
         >
-          Create Movie
+          Create Upcoming Movie
         </Button>
       </div>
       <div className="">{movieLists}</div>

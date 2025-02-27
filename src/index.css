@@ -1,10 +1,28 @@
 @import "tailwindcss";
 
-a.active > li {
-  color: #fff;
-  background-color: #1a202c;
+body {
+  background-color: #1f293d;
+  color: #fafafa;
 }
 
-a.active > li > div > div {
-  color: #fff;
+table.MuiTable-root * {
+  color: #fafafa;
+}
+
+.MuiPaper-root table * {
+  background-color: #1f293d;
+  color: #fafafa;
+}
+
+label.MuiInputLabel-root {
+  color: #fafafa;
+}
+
+input.MuiInputBase-input,
+textarea.MuiInputBase-input {
+  color: #fafafa;
+}
+
+fieldset.MuiOutlinedInput-notchedOutline {
+  border-color: #fafafa;
 }

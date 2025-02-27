@@ -42,7 +42,9 @@ const BookingDetail = () => {
                 </TableRow>
                 <TableRow>
                   <TableCell align="left">Seat</TableCell>
-                  <TableCell align="right">{booking?.seat_number}</TableCell>
+                  <TableCell align="right">
+                    {booking?.seat_numbers.join(", ")}
+                  </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell align="left">Date</TableCell>
