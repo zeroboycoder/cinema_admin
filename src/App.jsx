@@ -1,5 +1,7 @@
 import { Routes, Route } from "react-router";
+import { useNavigate } from "react-router-dom";
 import Layout from "./hoc/layout";
+import LoginPage from "./pages/auth/login";
 import DashboardPage from "./pages/dashboard/dashboard";
 import MoviePage from "./pages/movie/movie";
 import MovieDetailPage from "./pages/movie/movieDetail";
@@ -10,30 +12,51 @@ import CreateUpcomingMoviePage from "./pages/upcomingMovie/createUpcomingMovie";
 import UserPage from "./pages/user/user";
 import BookingPage from "./pages/booking/booking";
 import BookingDetailPage from "./pages/booking/bookingDetail";
+import { useEffect } from "react";
 
 const App = () => {
-  return (
-    <Layout>
-      <Routes>
-        <Route path="/users" Component={UserPage} />
-        <Route path="/movies" Component={MoviePage} />
-        <Route path="/movies/create" Component={CreateMoviePage} />
-        <Route path="/movies/:id" Component={MovieDetailPage} />
-        <Route path="/upcoming-movies" Component={UpcomingMoviePage} />
-        <Route
-          path="/upcoming-movies/create"
-          Component={CreateUpcomingMoviePage}
-        />
-        <Route
-          path="/upcoming-movies/:id"
-          Component={UpcomingMovieDetailPage}
-        />
-        <Route path="/bookings" Component={BookingPage} />
-        <Route path="/bookings/:id" Component={BookingDetailPage} />
-        <Route path="/" Component={DashboardPage} />
-      </Routes>
-    </Layout>
+  const adminId = localStorage.getItem("id");
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (adminId) {
+      navigate("/");
+    } else {
+      navigate("/login");
+    }
+  }, [adminId]);
+
+  let routes = (
+    <Routes>
+      <Route path="/login" Component={LoginPage} />
+    </Routes>
   );
+  if (adminId) {
+    routes = (
+      <Layout>
+        <Routes>
+          <Route path="/users" Component={UserPage} />
+          <Route path="/movies" Component={MoviePage} />
+          <Route path="/movies/create" Component={CreateMoviePage} />
+          <Route path="/movies/:id" Component={MovieDetailPage} />
+          <Route path="/upcoming-movies" Component={UpcomingMoviePage} />
+          <Route
+            path="/upcoming-movies/create"
+            Component={CreateUpcomingMoviePage}
+          />
+          <Route
+            path="/upcoming-movies/:id"
+            Component={UpcomingMovieDetailPage}
+          />
+          <Route path="/bookings" Component={BookingPage} />
+          <Route path="/bookings/:id" Component={BookingDetailPage} />
+          <Route path="/" Component={DashboardPage} />
+        </Routes>
+      </Layout>
+    );
+  }
+  return routes;
 };
 
 export default App;

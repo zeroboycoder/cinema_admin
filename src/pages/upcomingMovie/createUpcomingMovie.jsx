@@ -24,8 +24,10 @@ const CreateMovie = () => {
   const [description, setDescription] = useState("");
   const [file, setFile] = useState();
   const [preview, setPreview] = useState();
+  const [loading, setLoading] = useState(false);
 
   const onSubmitHandler = async () => {
+    setLoading(true);
     const formData = new FormData();
 
     formData.append("image", file);
@@ -46,6 +48,7 @@ const CreateMovie = () => {
     setDescription("");
     setFile();
     setPreview();
+    setLoading(false);
   };
 
   return (
@@ -112,13 +115,24 @@ const CreateMovie = () => {
           <img src={preview} alt="preview" width={100} height={180} />
         )}
         <div className="flex justify-end">
-          <Button
-            variant="outlined"
-            onClick={onSubmitHandler}
-            style={{ color: "#FC6D19", borderColor: "#FC6D19" }}
-          >
-            Create
-          </Button>
+          {loading ? (
+            <Button
+              variant="outlined"
+              onClick={onSubmitHandler}
+              disabled
+              style={{ color: "#FC6D19", borderColor: "#FC6D19" }}
+            >
+              Loading
+            </Button>
+          ) : (
+            <Button
+              variant="outlined"
+              onClick={onSubmitHandler}
+              style={{ color: "#FC6D19", borderColor: "#FC6D19" }}
+            >
+              Create
+            </Button>
+          )}
         </div>
       </div>
     </div>
