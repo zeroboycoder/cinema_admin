@@ -6,6 +6,7 @@ import DashboardPage from "./pages/dashboard/dashboard";
 import MoviePage from "./pages/movie/movie";
 import MovieDetailPage from "./pages/movie/movieDetail";
 import CreateMoviePage from "./pages/movie/createMovie";
+import UpdateMoviePage from "./pages/movie/updateMovie";
 import UpcomingMoviePage from "./pages/upcomingMovie/upcomingMovie";
 import UpcomingMovieDetailPage from "./pages/upcomingMovie/upcomingMovieDetail";
 import CreateUpcomingMoviePage from "./pages/upcomingMovie/createUpcomingMovie";
@@ -21,7 +22,7 @@ const App = () => {
 
   useEffect(() => {
     if (adminId) {
-      navigate("/");
+      // navigate("/");
     } else {
       navigate("/login");
     }
@@ -39,6 +40,7 @@ const App = () => {
           <Route path="/users" Component={UserPage} />
           <Route path="/movies" Component={MoviePage} />
           <Route path="/movies/create" Component={CreateMoviePage} />
+          <Route path="/movies/update/:id" Component={UpdateMoviePage} />
           <Route path="/movies/:id" Component={MovieDetailPage} />
           <Route path="/upcoming-movies" Component={UpcomingMoviePage} />
           <Route

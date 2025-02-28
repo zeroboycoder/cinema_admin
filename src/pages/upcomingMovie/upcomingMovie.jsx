@@ -24,20 +24,36 @@ const Movie = () => {
     fetchData();
   }, [page]);
 
+  const onDeleteHandler = async (id) => {
+    await API.delete(`/api/admin/movies/upcoming/${id}`);
+  };
+
   const movieLists = movies?.map((movie, i) => (
     <Card className="my-4" key={i} style={{ backgroundColor: "#1f293d" }}>
-      <div
-        className="flex"
-        onClick={() => navigate(`/upcoming-movies/${movie.id}`)}
-      >
-        <img src={movie.image} width={120} height={240} />
-        <div className="px-4 py-3 text-white">
-          <h1 className="text-xl font-bold">{movie.name}</h1>
-          <p>
-            {movie.description.length > 100
-              ? movie.description.substring(0, 100) + "..."
-              : movie.description}
-          </p>
+      <div className="flex justify-between">
+        <div onClick={() => navigate(`/upcoming-movies/${movie.id}`)}>
+          <img src={movie.image} width={120} height={240} />
+          <div className="px-4 py-3 text-white">
+            <h1 className="text-xl font-bold">{movie.name}</h1>
+            <p>
+              {movie.description.length > 100
+                ? movie.description.substring(0, 100) + "..."
+                : movie.description}
+            </p>
+          </div>
+        </div>
+        <div>
+          <Button
+            variant="text"
+            className=""
+            style={{ color: "red", textTransform: "none" }}
+            onClick={async () => {
+              await onDeleteHandler(movie.id);
+              window.location.reload();
+            }}
+          >
+            Delete
+          </Button>
         </div>
       </div>
     </Card>
